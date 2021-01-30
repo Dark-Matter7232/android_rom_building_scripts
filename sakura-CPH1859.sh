@@ -41,7 +41,7 @@ chmod +x env.sh
 bash env.sh
 
 # Lets setup the rom
-cd && mkdir los && cd los
+mkdir /workspace/WeW/los && cd /workspace/WeW/los
 repo init -u git://github.com/LineageOS/android.git -b lineage-17.1
 repo sync --current-branch -q --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
 
@@ -54,16 +54,16 @@ git am Revert-"libsepol:Make-an-unknown-permission-an-error-in-CIL".patch
 
 # Device tree
 echo -e "\n================== Clonning device tree ==================\n"
-git clone https://github.com/Dark-Matter7232/android_device_oppo_CPH1859.git -b lineage-17.1 device/oppo/CPH1859
+git clone https://github.com/Dark-Matter7232/android_device_oppo_CPH1859.git -b lineage-17.1 /workspace/WeW/los/device/oppo/CPH1859
 # cp -r ../sakura-priv vendor
 
 # Vendor Tree
 echo -e "\n================== Clonning vendor tree ==================\n"
-git clone https://github.com/CPH1859/proprietary_vendor_oppo_CPH1859.git -b lineage-17.1 vendor/oppo/CPH1859
+git clone https://github.com/CPH1859/proprietary_vendor_oppo_CPH1859.git -b lineage-17.1 /workspace/WeW/los/vendor/oppo/CPH1859
 
 # Kernel Tree
 echo -e "\n================== Clonning kernel tree ==================\n"
-git clone https://github.com/CyberJalagam/android_kernel_oppo_mt6771.git -b Alien-4.4.205 kernel/oppo/mt6771
+git clone https://github.com/CyberJalagam/android_kernel_oppo_mt6771.git -b Alien-4.4.205 /workspace/WeW/los/kernel/oppo/mt6771
 echo -e "\n Done!\n"
 
 source build/envsetup.sh

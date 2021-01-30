@@ -41,9 +41,9 @@ chmod +x env.sh
 bash env.sh
 
 # Lets setup the rom
-cd && mkdir sakura && cd sakura
-repo init -u git://github.com/ProjectSakura/android.git -b 11
-repo sync --current-branch --force-sync --no-clone-bundle --no-tags --optimized-fetch --prune -j8
+cd && mkdir los && cd los
+repo init -u git://github.com/LineageOS/android.git -b lineage-17.1
+repo sync --current-branch -q --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
 
 # Revert an selinux commit
 echo -e "\n======================== SeFix ============================\n"
@@ -54,25 +54,24 @@ git am Revert-"libsepol:Make-an-unknown-permission-an-error-in-CIL".patch
 
 # Device tree
 echo -e "\n================== Clonning device tree ==================\n"
-git clone https://github.com/CPH1859/android_device_oppo_CPH1859 -b test-2 device/oppo/CPH1859
-
-cp -r ../sakura-priv vendor
+git clone https://github.com/Dark-Matter7232/android_device_oppo_CPH1859.git -b lineage-17.1 device/oppo/CPH1859
+# cp -r ../sakura-priv vendor
 
 # Vendor Tree
 echo -e "\n================== Clonning vendor tree ==================\n"
-git clone https://github.com/CPH1859/proprietary_vendor_oppo_CPH1859 vendor/oppo/CPH1859
+git clone https://github.com/CPH1859/proprietary_vendor_oppo_CPH1859.git -b lineage-17.1 vendor/oppo/CPH1859
 
 # Kernel Tree
 echo -e "\n================== Clonning kernel tree ==================\n"
-git clone https://github.com/CPH1859/android_kernel_oppo_mt6771 kernel/oppo/mt6771
+git clone https://github.com/CyberJalagam/android_kernel_oppo_mt6771.git -b Alien-4.4.205 kernel/oppo/mt6771
 echo -e "\n Done!\n"
 
 source build/envsetup.sh
 lunch lineage_CPH1859-userdebug
-export SAKURA_MAINTAINER=JAISHNAVPRASAD
+# export SAKURA_MAINTAINER=JAISHNAVPRASAD
 export SKIP_ABI_CHECKS=true
-export SAKURA_OFFICIAL=true
-export TARGET_USES_BLUR=true
-export LAWNCHAIR_OUTPUT=true
+# export SAKURA_OFFICIAL=true
+# export TARGET_USES_BLUR=true
+# export LAWNCHAIR_OUTPUT=true
 make bacon -j8
 echo "<<<<< © RB INTERNATIONAL NETWORK™ >>>>>"
